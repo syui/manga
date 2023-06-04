@@ -23,6 +23,7 @@ jobs:
         TZ: "Asia/Tokyo"
       run: |
            yarn build
+           cp -rf CNAME ./dist/
 
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3

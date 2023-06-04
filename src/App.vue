@@ -1,5 +1,6 @@
 <template>
 	<div id="app">
+		{{ loc }}
 		<a :href="this.url + this.s_a"><button v-on:click="page_run(s_a)">1</button></a>
 		<a :href="this.url + this.s_b"><button v-on:click="page_run(s_b)">2</button></a>
 		<a :href="this.url + this.s_c"><button v-on:click="page_run(s_c)">3</button></a>
@@ -7,7 +8,7 @@
 		<a :href="this.url + this.s_e"><button v-on:click="page_run(s_e)">5</button></a>
 		<hooper :settings="hooperSettings">
 			<slide v-for="(n,index) of products" :key="n">
-				<img :src="'/manga/'+ (index) +'.png'" />
+				<img :src="url + 'manga/'+ (index) +'.webp'" />
 				<div class="page_n">{{ n }}</div>
 			</slide>
 			<hooper-navigation slot="hooper-addons"></hooper-navigation>
@@ -28,7 +29,8 @@ import {
 
 import 'hooper/dist/hooper.css';
 var page = 107;
-let loc = window.location.pathname.split('/').slice(-1)[0];
+var loc = window.location.pathname.split('/').slice(-1)[0];
+//let loc = window.location.pathname.split('/').slice(0)[3];
 
 export default {
   name: 'App',
@@ -41,9 +43,9 @@ export default {
   },
   data() {
     return {
-					url: "/",
+					url: "https://manga.syui.ai/",
 					s_a: 0,
-					s_b: 15,
+					s_b: 17,
 					s_c: 41,
 					s_d: 51,
 					s_e: 60,
@@ -58,7 +60,7 @@ export default {
 		methods: {
 			page_run(s) {
 				this.loc = s;
-				//this.loc = window.location.pathname.split('/').slice(0)[3];
+				this.hooperSettings.initialSlide = s;
 			}
 		}
 };
@@ -69,5 +71,8 @@ export default {
 button {
     padding: 10px;
     margin: 5px;
+}
+ul.hooper-track {
+	padding: 0px;
 }
 </style>
